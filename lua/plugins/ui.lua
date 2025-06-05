@@ -1,24 +1,20 @@
 return {
-  {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    lazy = false,
-    dependencies = {
-      "nvim-tree/nvim-web-devicons", -- optional icons
-    },
-    config = function()
-      require("nvim-tree").setup({
-        view = {
+  "nvim-tree/nvim-tree.lua",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = function()
+    require("nvim-tree").setup({
+      git = {
+        enable = true,
+        ignore = false,
+      },
+      view = {
           width = 50,
           side = "right",
         },
-        renderer = {
-          group_empty = true,
-        },
-        filters = {
-          dotfiles = false,
-        },
-      })
-    end,
-  },
+      filters = {
+        dotfiles = false,
+        custom = { "^\\.git$" },
+      },
+    })
+  end,
 }
