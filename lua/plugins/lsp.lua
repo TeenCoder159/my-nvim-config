@@ -13,7 +13,9 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "pyright",        -- Python LSP
-          "rust_analyzer",  -- Rust LSP
+          "rust_analyzer",
+          "html",
+          "cssls",-- Rust LSP
         },
         automatic_installation = true,
       })
@@ -55,9 +57,7 @@ return {
         settings = {
           ["rust-analyzer"] = {
             cargo = { allFeatures = true },
-            checkOnSave = {
-              command = "clippy",
-            },
+            checkOnSave = true,
           },
         },
       })

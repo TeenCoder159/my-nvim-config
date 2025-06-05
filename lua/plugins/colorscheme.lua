@@ -29,5 +29,19 @@ require('kanagawa').setup({
 
 -- setup must be called before loading
 vim.cmd("colorscheme kanagawa")
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    vim.cmd [[
+      highlight Normal guibg=NONE ctermbg=NONE
+      highlight NormalNC guibg=NONE ctermbg=NONE
+      highlight LineNr guibg=NONE ctermbg=NONE
+      highlight SignColumn guibg=NONE ctermbg=NONE
+      highlight VertSplit guibg=NONE ctermbg=NONE
+    ]]
+  end,
+})
+
 end
 }
