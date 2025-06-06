@@ -11,6 +11,8 @@ return {
           local path = vim.fn.expand("%:p")
           if path:match("" .. home .. "/.config/nvim/") then
             return "Modifying nvim configs like a pro"
+          elseif path:match("" .. home .. "/Documents/Coding_stuff/rust/project/oneAI") then
+              return "SaaS-ing out OneLLM"
           elseif path:match("" .. home .. "/Documents/Coding_stuff/rust/project/") then
             return "Fighting the borrow checker"
           elseif path:match("" .. home .. "/Documents/Coding_stuff/python/projects/") then
