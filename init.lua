@@ -23,3 +23,4 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 vim.opt.number = true
 
 vim.keymap.set("n", "sy", ":Lazy sync<CR>")
+vim.opt.clipboard = "unnamedplus"
