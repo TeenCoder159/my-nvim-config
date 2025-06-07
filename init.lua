@@ -9,6 +9,9 @@ require("kanagawa").setup({
 vim.cmd("colorscheme kanagawa")
 vim.g.mapleader = " "         -- <leader> is now the Space key
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle File Explorer" })
+vim.keymap.set("n", "<leader>q",":q | :q<CR>", { desc = "Quit and write everything" })
+
+
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
   callback = function()
     local api = require("nvim-tree.api")
