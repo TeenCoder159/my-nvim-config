@@ -7,9 +7,6 @@ require("kanagawa").setup({
   transparent = true,
 })
 vim.cmd("colorscheme kanagawa")
-vim.g.mapleader = " "         -- <leader> is now the Space key
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle File Explorer" })
-vim.keymap.set("n", "<leader>q",":q | :q<CR>", { desc = "Quit and write everything" })
 
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
@@ -22,5 +19,5 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 })
 vim.opt.number = true
 
-vim.keymap.set("n", "sy", ":Lazy sync<CR>")
 vim.opt.clipboard = "unnamedplus"
+require("config.keymaps")
