@@ -41,3 +41,23 @@ vim.keymap.set("n", "<leader>i", function()
 
   vim.fn.writefile(lines, gitignore_path)
 end, { desc = "Toggle current file in .gitignore" })
+
+-- Cargo fmt with <C-f>
+
+vim.keymap.set("n", "<C-f>", function()
+  vim.cmd("write") -- optional: save the file first
+  vim.fn.jobstart("cargo fmt", {
+    stdout_buffered = true,
+    on_stdout = function(_, data)
+      if data then
+        print("cargo fmt completed")
+      end
+    end,
+    on_stderr = function(_, data)
+      if data and data[1] ~= "" then
+        print("Error running cargo fmt:")
+        print(table.concat(data, "\n"))
+      end
+    end,
+  })
+end, { desc = "Run cargo fmt", noremap = true, silent = true })
