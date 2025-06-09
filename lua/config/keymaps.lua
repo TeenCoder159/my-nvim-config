@@ -43,21 +43,36 @@ vim.keymap.set("n", "<leader>i", function()
 end, { desc = "Toggle current file in .gitignore" })
 
 -- Cargo fmt with <C-f>
-
 vim.keymap.set("n", "<C-f>", function()
-  vim.cmd("write") -- optional: save the file first
-  vim.fn.jobstart("cargo fmt", {
+  vim.cmd("write") -- Save current file first
+
+  local file = vim.fn.expand("%:p")
+  local ext = vim.fn.expand("%:e")
+
+  local cmd = nil
+  if ext == "rs" then
+    cmd = "cargo fmt"
+  elseif ext == "py" then
+    cmd = "ruff format " .. file
+  else
+    print("No formatter configured for this filetype.")
+    return
+  end
+
+  vim.fn.jobstart(cmd, {
     stdout_buffered = true,
     on_stdout = function(_, data)
-      if data then
-        print("cargo fmt completed")
+      if data and data[1] ~= "" then
+        print(table.concat(data, "\n"))
+      else
+        print(cmd .. " completed")
       end
     end,
     on_stderr = function(_, data)
       if data and data[1] ~= "" then
-        print("Error running cargo fmt:")
+        print("Error running " .. cmd .. ":")
         print(table.concat(data, "\n"))
       end
     end,
   })
-end, { desc = "Run cargo fmt", noremap = true, silent = true })
+end, { desc = "Format current file", noremap = true, silent = true })
