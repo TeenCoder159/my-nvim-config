@@ -18,11 +18,9 @@ return {
           elseif path:match("" .. home .. "/Documents/Coding_stuff/rust/project/") then
             return "Fighting the borrow checker"
           elseif path:match("" .. home .. "/Documents/Coding_stuff/comps") then
-            return "Competing with competiton."
+            return "Competing with competiton"
           elseif path:match("" .. home .. "/Documents/Coding_stuff/python/projects/") then
                 return "WHY IS IT SO GOD DAMN SLOWWWWW"
-          elseif path:match("" .. home .. "/Documents/onellm/") then
-                return "SaaS-ing out OneLLM"
 
 
           end

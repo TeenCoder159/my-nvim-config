@@ -30,6 +30,31 @@ return {
     })
     -- Create a normal-mode key mapping to toggle the terminal
     vim.keymap.set("n", "<C-j>", "<cmd>ToggleTerm<CR>", { noremap = true, silent = true })
+
+    local Terminal = require("toggleterm.terminal").Terminal
+    local gemini = Terminal:new({
+      cmd = "gemini",
+      hidden = true,
+      direction = "float",
+      float_opts = {
+        border = "curved",
+        width = function()
+            return math.floor(vim.o.columns * 0.8)
+        end,
+        height = function()
+            return math.floor(vim.o.lines * 0.8)
+        end,
+        winblend = 3,
+      },
+    })
+
+    function _G.toggle_gemini()
+      gemini:toggle()
+    end
+
+    local opts = { noremap = true, silent = true, desc = "Toggle Gemini" }
+    vim.keymap.set("n", "<C-g>", "<cmd>lua _G.toggle_gemini()<CR>", opts)
+    vim.keymap.set("t", "<C-g>", "<C-\\%><C-n><cmd>lua _G.toggle_gemini()<CR>", opts)
   end,
 }
 
