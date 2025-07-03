@@ -25,6 +25,13 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       local lspconfig = require("lspconfig")
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
+      })
 
       -- Optional: Setup completion capabilities if using nvim-cmp
       local capabilities = vim.lsp.protocol.make_client_capabilities()
