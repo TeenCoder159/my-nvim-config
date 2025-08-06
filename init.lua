@@ -4,10 +4,12 @@ vim.cmd("set softtabstop=4")
 
 require("config.lazy")
 
-require("kanagawa").setup({
-    transparent = true,
-})
-vim.cmd("colorscheme kanagawa")
+-- require("kanagawa").setup({
+--     transparent = true,
+-- })
+-- vim.cmd("colorscheme kanagawa")
+
+vim.cmd("colorscheme gruvbox")
 
 vim.opt.number = true
 vim.opt.clipboard = "unnamedplus"

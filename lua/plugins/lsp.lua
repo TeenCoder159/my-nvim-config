@@ -63,6 +63,9 @@ return {
         on_attach = on_attach,
         settings = {
           ["rust-analyzer"] = {
+            rustfmt = {
+                overrideCommand = { "dx", "fmt", "--all-code", "-f", "-" },
+            },
             cargo = { allFeatures = true },
             checkOnSave = true,
           },
