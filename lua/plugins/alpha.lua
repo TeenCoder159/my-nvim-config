@@ -75,13 +75,8 @@ config = function(_, dashboard)
     callback = function()
       local stats = require("lazy").stats()
       local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-      dashboard.section.footer.val = "⚡ Neovim loaded "
-        .. stats.loaded
-        .. "/"
-        .. stats.count
-        .. " plugins in "
-        .. ms
-        .. "ms"
+      local cwd = vim.fn.getcwd()
+      dashboard.section.footer.val = "⚡" .. cwd
       pcall(vim.cmd.AlphaRedraw)
     end,
   })
