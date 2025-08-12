@@ -2,8 +2,21 @@ return {
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
+    lazy = false,
     config = function()
       require("mason").setup()
+    end,
+  },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = { 'go', 'gomod', 'lua', 'zig' }, -- Added 'zig' parser
+        highlight = {
+          enable = true,
+        },
+      }
     end,
   },
   {
@@ -13,9 +26,11 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "pyright",        -- Python LSP
-          "rust_analyzer",
+          "rust_analyzer",  -- Rust LSP
           "html",
-          "cssls",-- Rust LSP
+          "cssls",
+          "gopls",          -- Go LSP
+          "zls",            -- Zig LSP
         },
         automatic_installation = true,
       })
@@ -33,16 +48,13 @@ return {
         severity_sort = true,
       })
 
-      -- Optional: Setup completion capabilities if using nvim-cmp
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
       if ok then
         capabilities = cmp_nvim_lsp.default_capabilities()
       end
 
-      -- Optional: on_attach for keymaps, etc.
       local on_attach = function(client, bufnr)
-        -- Example keymap
         local bufmap = function(mode, lhs, rhs)
           vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, { noremap = true, silent = true })
         end
@@ -64,12 +76,33 @@ return {
         settings = {
           ["rust-analyzer"] = {
             rustfmt = {
-                overrideCommand = { "dx", "fmt", "--all-code", "-f", "-" },
+              overrideCommand = { "dx", "fmt", "--all-code", "-f", "-" },
             },
             cargo = { allFeatures = true },
             checkOnSave = true,
           },
         },
+      })
+
+      -- Go
+      lspconfig.gopls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+              shadow = true,
+            },
+            staticcheck = true,
+          },
+        },
+      })
+
+      -- Zig
+      lspconfig.zls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
       })
     end,
   },
