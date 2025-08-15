@@ -19,6 +19,8 @@ return {
             return "Rusting out a rust based numpy"
           elseif path:match("" .. home .. "/Documents/Coding_stuff/rust/project/") then
             return "Fighting the borrow checker"
+          elseif path:match("" .. home .. "/Documents/Coding_stuff/zig/notes/ch01") then
+            return "Zigging around"
           elseif path:match("" .. home .. "/Documents/Coding_stuff/comps") then
             return "Competing with competiton"
           elseif path:match("" .. home .. "/Documents/Coding_stuff/python/projects/") then

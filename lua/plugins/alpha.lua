@@ -29,7 +29,7 @@ return {
     dashboard.section.header.opts.hl = "AlphaHeader"
     dashboard.section.buttons.val = {
       dashboard.button("f", " " .. " Find file",       "<cmd>Telescope find_files <cr>"),
-      dashboard.button("n", "  New file", "<cmd>Oil<cr>"),
+      dashboard.button("n", "  New file", "<cmd>Oil <CR>"),
       dashboard.button("g", " " .. " LazyGit", "<cmd> LazyGit <CR>"),
       dashboard.button("l", "󰒲 " .. " Lazy",            "<cmd> Lazy <cr>"),
       dashboard.button("q", " " .. " Quit",            "<cmd> qa <cr>"),

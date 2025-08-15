@@ -15,10 +15,9 @@ return {
                 lualine_a = {
                     { "mode", icon = "" },
                 },
-                lualine_b = { "branch", "diff", "diagnostics" },
+                lualine_b = { "branch", "diff", "diagnostics"},
                 lualine_c = { "filename" },
 lualine_x = {
-          "fileformat",
           "filetype",
           {
             function()
