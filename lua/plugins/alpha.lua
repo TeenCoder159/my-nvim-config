@@ -48,7 +48,8 @@ return {
       section = dashboard.section,
       opts = dashboard.opts,
       on_highlights = function(highlights, colors)
-        highlights.AlphaHeader = { fg = "#b8bb26" }  -- Gruvbox green
+        highlights.AlphaHeader = { fg = "#627d9a" }  -- Kanagawa blue
+--         highlights.AlphaHeader = { fg = "#b8bb26" }  -- Gruvbox green
       end,
     }
   end,
@@ -67,7 +68,7 @@ config = function(_, dashboard)
   require("alpha").setup(dashboard.opts)
 
   -- Force set highlight after setup
-  vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#b8bb26" }) -- Gruvbox green
+  vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#627d9a" }) -- Gruvbox green
 
   vim.api.nvim_create_autocmd("User", {
     once = true,
