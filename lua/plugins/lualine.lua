@@ -4,7 +4,7 @@ return {
     config = function()
         require("lualine").setup({
             options = {
-                theme = "catppuccin",
+                theme = "auto",
                 icons_enabled = true,
                 component_separators = { left = "", right = "" },
                 section_separators = { left = "", right = "" },
@@ -13,7 +13,7 @@ return {
             },
             sections = {
                 lualine_a = {
-                    { "mode", icon = "" },
+                    { "mode" },
                 },
                 lualine_b = { "branch", "diff", "diagnostics"},
                 lualine_c = { "filename" },
