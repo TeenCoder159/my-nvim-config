@@ -8,14 +8,12 @@ return {
     end,
   },
   {
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     config = function()
-      require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'go', 'gomod', 'lua', 'zig' }, -- Added 'zig' parser
-        highlight = {
-          enable = true,
-        },
+      require("nvim-treesitter.configs").setup {
+        ensure_installed = { "go", "gomod", "lua", "zig" },
+        highlight = { enable = true },
       }
     end,
   },
@@ -25,12 +23,12 @@ return {
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "pyright",        -- Python LSP
-          "rust_analyzer",  -- Rust LSP
+          "pyright",
+          "rust_analyzer",
           "html",
           "cssls",
-          "gopls",          -- Go LSP
-          "zls",            -- Zig LSP
+          "gopls",
+          "zls",
         },
         automatic_installation = true,
       })
@@ -39,7 +37,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      local lspconfig = require("lspconfig")
       vim.diagnostic.config({
         virtual_text = true,
         signs = true,
@@ -54,23 +51,23 @@ return {
         capabilities = cmp_nvim_lsp.default_capabilities()
       end
 
-      local on_attach = function(client, bufnr)
+      local on_attach = function(_, bufnr)
         local bufmap = function(mode, lhs, rhs)
-          vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, { noremap = true, silent = true })
+          vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, noremap = true, silent = true })
         end
 
-        bufmap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-        bufmap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+        bufmap("n", "gd", vim.lsp.buf.definition)
+        bufmap("n", "K", vim.lsp.buf.hover)
       end
 
       -- Python
-      lspconfig.pyright.setup({
+      vim.lsp.config("pyright", {
         capabilities = capabilities,
         on_attach = on_attach,
       })
 
       -- Rust
-      lspconfig.rust_analyzer.setup({
+      vim.lsp.config("rust_analyzer", {
         capabilities = capabilities,
         on_attach = on_attach,
         settings = {
@@ -85,7 +82,7 @@ return {
       })
 
       -- Go
-      lspconfig.gopls.setup({
+      vim.lsp.config("gopls", {
         capabilities = capabilities,
         on_attach = on_attach,
         settings = {
@@ -100,7 +97,7 @@ return {
       })
 
       -- Zig
-      lspconfig.zls.setup({
+      vim.lsp.config("zls", {
         capabilities = capabilities,
         on_attach = on_attach,
       })
