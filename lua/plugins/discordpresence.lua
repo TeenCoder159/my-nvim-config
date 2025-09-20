@@ -12,7 +12,7 @@
            if path:match("" .. home .. "/.config/nvim/") then
              return "Modifying nvim configs like a pro"
            elseif path:match("" .. home .. "/Documents/onellm/") then
-               return "OneLLM is dead"
+               return "OneLLM is dead, probably"
            elseif path:match("" .. home .. "/Documents/NYP_Stuff") then
                return "Urghhhhhh Schoolwork.. unless it's rust..."
            elseif path:match("" .. home .. "/Documents/Coding_stuff/rust/project/fastnd") then
