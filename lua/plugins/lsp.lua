@@ -12,7 +12,7 @@ return {
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup {
-        ensure_installed = { "go", "gomod", "lua", "zig" },
+        ensure_installed = { "go", "gomod", "lua", "zig", "gleam" },
         highlight = { enable = true },
       }
     end,
@@ -29,6 +29,7 @@ return {
           "cssls",
           "gopls",
           "zls",
+          -- ⚠️ don't add "gleam" here, mason doesn't know it
         },
         automatic_installation = true,
       })
@@ -37,25 +38,25 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-vim.diagnostic.config({
-      virtual_text = {
-        spacing = 2,
-        prefix = "●",
-      },
-      signs = true,
-      underline = true,
-      update_in_insert = false,
-      severity_sort = true,
-    })
+      vim.diagnostic.config({
+        virtual_text = {
+          spacing = 2,
+          prefix = "●",
+        },
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
+      })
 
-     vim.api.nvim_create_autocmd("LspAttach", {
-      callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client and client.server_capabilities.inlayHintProvider then
-          vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-        end
-      end,
-    })
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client and client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+          end
+        end,
+      })
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
@@ -113,6 +114,25 @@ vim.diagnostic.config({
         capabilities = capabilities,
         on_attach = on_attach,
       })
+
+      -- Gleam (manual setup)
+local lspconfig = require("lspconfig")
+      local configs = require("lspconfig.configs")
+
+      if not configs.gleam then
+        configs.gleam = {
+          default_config = {
+            cmd = { "gleam", "lsp" },
+            filetypes = { "gleam" },
+            root_dir = lspconfig.util.root_pattern("gleam.toml", ".git"),
+          },
+        }
+      end
+
+      lspconfig.gleam.setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
     end,
   },
 }
