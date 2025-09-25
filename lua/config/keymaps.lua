@@ -54,6 +54,10 @@ vim.keymap.set("n", "<C-f>", function()
     cmd = "cargo fmt"
   elseif ext == "py" then
     cmd = "ruff format " .. file
+  elseif ext == "gleam" then
+    cmd = "gleam format"
+  elseif ext == "js" or ext == "ts" or ext == "jsx" or ext == "tsx" or ext == "css" or ext == "html" then
+    cmd = "deno fmt"
   else
     print("No formatter configured for this filetype.")
     return
@@ -67,12 +71,14 @@ vim.keymap.set("n", "<C-f>", function()
       else
         print(cmd .. " completed")
       end
+      vim.cmd("checktime")  -- reload all changed buffers
     end,
     on_stderr = function(_, data)
       if data and data[1] ~= "" then
         print("Error running " .. cmd .. ":")
         print(table.concat(data, "\n"))
       end
+      vim.cmd("checktime")  -- also reload if it errored but still wrote to file
     end,
   })
 end, { desc = "Format current file", noremap = true, silent = true })

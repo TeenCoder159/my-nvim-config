@@ -11,10 +11,19 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter.configs").setup {
-        ensure_installed = { "go", "gomod", "lua", "zig", "gleam" },
-        highlight = { enable = true },
-      }
+	require("nvim-treesitter.configs").setup {
+	  ensure_installed = {
+	    "go",
+	    "gomod",
+	    "lua",
+	    "zig",
+	    "gleam",
+	    "javascript", -- for JSX
+	    "typescript", -- if you use TS
+	    "tsx",        -- for TSX
+	  },
+	  highlight = { enable = true },
+	}
     end,
   },
   {

@@ -1,13 +1,9 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=4")
-vim.cmd("set softtabstop=4")
-
 require("config.lazy")
 
- require("kanagawa").setup({
---     transparent = true,
- })
- vim.cmd("colorscheme kanagawa")
+require("kanagawa").setup({
+	--     transparent = true,
+})
+vim.cmd("colorscheme kanagawa")
 
 -- vim.cmd("colorscheme gruvbox")
 
@@ -16,3 +12,17 @@ vim.opt.clipboard = "unnamedplus"
 
 require("config.keymaps")
 
+-- vim.api.nvim_create_autocmd("LspAttach", {
+-- 	group = vim.api.nvim_create_augroup("lsp", { clear = true }),
+-- 	callback = function(args)
+-- 		-- 2
+-- 		vim.api.nvim_create_autocmd("BufWritePre", {
+-- 			-- 3
+-- 			buffer = args.buf,
+-- 			callback = function()
+-- 				-- 4 + 5
+-- 				vim.lsp.buf.format { async = false, id = args.data.client_id }
+-- 			end,
+-- 		})
+-- 	end
+-- })
