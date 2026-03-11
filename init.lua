@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("VimLeave", {
 
 require("config.lazy")
 local function augroup(name)
-return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+    return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
 
 vim.api.nvim_create_autocmd("VimEnter", {
@@ -53,17 +53,10 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- vim.api.nvim_create_autocmd("LspAttach", {
--- 	group = vim.api.nvim_create_augroup("lsp", { clear = true }),
--- 	callback = function(args)
--- 		-- 2
--- 		vim.api.nvim_create_autocmd("BufWritePre", {
--- 			-- 3
--- 			buffer = args.buf,
--- 			callback = function()
--- 				-- 4 + 5
--- 				vim.lsp.buf.format { async = false, id = args.data.client_id }
--- 			end,
--- 		})
--- 	end
--- })
+vim.lsp.config("ltex", {
+  autostart = false,
+  filetypes = {},      -- no filetypes => never attaches
+  on_attach = function() end,
+})
+
+vim.opt.spell = false
