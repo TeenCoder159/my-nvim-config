@@ -18,7 +18,6 @@ return {
         "gomod",
         "lua",
         "zig",
-        "gleam",
         "javascript",
         "typescript",
         "tsx",
@@ -191,28 +190,6 @@ return {
         on_attach = on_attach,
       })
 
-      ----------------------------------------------------------------------
-      -- Gleam
-      ----------------------------------------------------------------------
-	local lspconfig = require("lspconfig")
-	local configs = require("lspconfig.configs")
-
-	-- Only define the server if lspconfig doesn't already have it
-	if not configs.gleam then
-	  configs.gleam = {
-	    default_config = {
-	      cmd = { "gleam", "lsp" },
-	      filetypes = { "gleam" },
-	      root_dir = lspconfig.util.root_pattern("gleam.toml", ".git"),
-	      single_file_support = true,
-	    },
-	  }
-	end
-
-	lspconfig.gleam.setup({
-	  capabilities = capabilities,
-	  on_attach = on_attach,
-	})
     end,
   },
 }
