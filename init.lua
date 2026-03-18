@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "gleam", "html", "css", "javascript", "typescript", "typescriptreact", "javascriptreact" },
+  pattern = { "html", "css", "javascript", "typescript", "typescriptreact", "javascriptreact" },
   callback = function()
     vim.bo.tabstop = 2
     vim.bo.shiftwidth = 2
@@ -60,3 +60,4 @@ vim.lsp.config("ltex", {
 })
 
 vim.opt.spell = false
+vim.lsp.enable("gleam")
