@@ -1,0 +1,13 @@
+-- Indent / tab settings per filetype
+
+-- 
+-- -- Default for everything else: 4
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "*",
+--   callback = function()
+--     vim.bo.tabstop = 8
+--     vim.bo.shiftwidth = 4
+--     vim.bo.softtabstop = 4
+--     vim.bo.expandtab = true
+--   end,
+-- })
