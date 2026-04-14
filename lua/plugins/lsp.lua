@@ -12,7 +12,7 @@ return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   config = function()
-    require("nvim-treesitter.config").setup({
+    require("nvim-treesitter").setup({
       ensure_installed = {
         "go",
         "gomod",
@@ -21,6 +21,9 @@ return {
         "javascript",
         "typescript",
         "tsx",
+	"jsx",
+	"html",
+	"css",
       },
       highlight = { enable = true },
     })
@@ -185,10 +188,37 @@ return {
       ----------------------------------------------------------------------
       -- TypeScript / JavaScript
       ----------------------------------------------------------------------
-      vim.lsp.config("ts_ls", {
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
+vim.lsp.config("ts_ls", {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = {          -- add this block
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
+  },
+  root_markers = {       -- add this block
+    "package.json",
+    "tsconfig.json",
+    "jsconfig.json",
+    ".git",
+  },
+})
+
+vim.lsp.config("tailwindcss", {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = {
+    "html",
+    "css",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+  },
+})
 
     end,
   },

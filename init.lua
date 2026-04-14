@@ -43,6 +43,11 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'gleam' },
+    callback = function() vim.treesitter.start() end,
+})
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "html", "css", "javascript", "typescript", "typescriptreact", "javascriptreact" },
   callback = function()
@@ -53,6 +58,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+
 vim.lsp.config("ltex", {
   autostart = false,
   filetypes = {},      -- no filetypes => never attaches
@@ -61,3 +67,6 @@ vim.lsp.config("ltex", {
 
 vim.opt.spell = false
 vim.lsp.enable("gleam")
+vim.lsp.enable("jsx")
+vim.lsp.enable("tsx")
+vim.lsp.enable("sourcekit")
