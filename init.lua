@@ -5,6 +5,13 @@ require("kanagawa").setup({
 })
 vim.cmd("colorscheme kanagawa")
 
+vim.api.nvim_set_hl(0, "@tag", { link = "htmlTag" })
+vim.api.nvim_set_hl(0, "@tag.tsx", { link = "htmlTag" })
+vim.api.nvim_set_hl(0, "@tag.builtin.tsx", { fg = "#61AFEF" })
+vim.api.nvim_set_hl(0, "@tag.attribute.tsx", { fg = "#E5C07B" })
+vim.api.nvim_set_hl(0, "@tag.delimiter.tsx", { fg = "#ABB2BF" })
+vim.api.nvim_set_hl(0, "@constructor.tsx", { fg = "#E06C75" })
+
 -- vim.cmd("colorscheme gruvbox")
 
 vim.opt.number = true
