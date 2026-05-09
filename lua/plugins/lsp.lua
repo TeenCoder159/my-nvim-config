@@ -22,8 +22,6 @@ return {
         "typescript",
         "tsx",
 	"jsx",
-	"html",
-	"css",
       },
       highlight = { enable = true },
     })
