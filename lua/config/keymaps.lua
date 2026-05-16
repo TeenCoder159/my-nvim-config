@@ -50,12 +50,15 @@ vim.keymap.set("n", "<C-f>", function()
   local ext = vim.fn.expand("%:e")
 
   local cmd = nil
+
   if ext == "rs" then
     cmd = "cargo fmt"
   elseif ext == "py" then
     cmd = "ruff format " .. file
   elseif ext == "gleam" then
     cmd = "gleam format"
+  elseif ext == "zig" then
+    cmd = "zig fmt ."
   elseif ext == "js" or ext == "ts" or ext == "jsx" or ext == "tsx" or ext == "css" or ext == "html" then
     cmd = "deno fmt"
   else

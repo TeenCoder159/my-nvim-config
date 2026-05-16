@@ -71,11 +71,33 @@ return {
             ollama:toggle()
     end
 
+    local lumen = Terminal:new({
+      cmd = "lumen diff",
+      hidden = true,
+      direction = "float",
+      float_opts = {
+        border = "curved",
+        width = function()
+          return math.floor(vim.o.columns * 0.9)
+        end,
+        height = function()
+          return math.floor(vim.o.lines * 0.9)
+        end,
+        winblend = 3,
+      },
+    })
+
+    function _G.toggle_lumen()
+      lumen:toggle()
+    end
+
     local opts = { noremap = true, silent = true, desc = "Toggle Gemini" }
     vim.keymap.set("n", "<C-g>", "<cmd>lua _G.toggle_lazyjj()<CR>", opts)
     vim.keymap.set("t", "<C-g>", "<C-\\%><C-n><cmd>lua _G.toggle_lazyjj()<CR>", opts)
     vim.keymap.set("n", "<C-n>", "<cmd>lua _G.toggle_ollama()<CR>", opts)
     vim.keymap.set("t", "<C-n>", "<C-\\%><C-n><cmd>lua _G.toggle_ollama()<CR>", opts)
+
+    vim.keymap.set("n", "<leader>l", "<cmd>lua _G.toggle_lumen()<CR>", { noremap = true, silent = true, desc = "Toggle Lumen Diff" })
+    vim.keymap.set("t", "<leader>l", "<C-\\><C-n><cmd>lua _G.toggle_lumen()<CR>", { noremap = true, silent = true, desc = "Toggle Lumen Diff" })
   end,
 }
-
