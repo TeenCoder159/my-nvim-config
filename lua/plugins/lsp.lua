@@ -18,10 +18,11 @@ return {
         "gomod",
         "lua",
         "zig",
+        "swift",
         "javascript",
         "typescript",
         "tsx",
-	"jsx",
+        "jsx",
       },
       highlight = { enable = true },
     })
@@ -33,15 +34,15 @@ return {
      dependencies = { "williamboman/mason.nvim" },
      config = function()
        require("mason-lspconfig").setup({
-         ensure_installed = {
-           "pyright",
-           "rust_analyzer",
-           "html",
-           "tailwindcss",
-           "gopls",
-           "zls",
-           "ts_ls",
-         },
+          ensure_installed = {
+            "pyright",
+            "rust_analyzer",
+            "html",
+            "tailwindcss",
+            "gopls",
+            "zls",
+            "ts_ls",
+          },
          automatic_installation = true,
        })
      end,

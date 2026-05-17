@@ -61,6 +61,20 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "swift" },
+  callback = function()
+    vim.bo.tabstop = 4
+    vim.bo.shiftwidth = 4
+    vim.bo.softtabstop = 4
+    vim.bo.expandtab = true
+
+    vim.keymap.set("n", "<leader>sb", ":w<CR>:vnew<CR>:term swift build<CR>i", { desc = "Swift build" })
+    vim.keymap.set("n", "<leader>st", ":w<CR>:vnew<CR>:term swift test<CR>i", { desc = "Swift test" })
+    vim.keymap.set("n", "<leader>sr", ":w<CR>:vnew<CR>:term swift run<CR>i", { desc = "Swift run" })
+  end,
+})
+
 
 vim.lsp.config("ltex", {
   autostart = false,
