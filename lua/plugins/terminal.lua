@@ -76,8 +76,5 @@ return {
     vim.keymap.set("t", "<C-g>", "<C-\\%><C-n><cmd>lua _G.toggle_lazyjj()<CR>", opts)
     vim.keymap.set("n", "<C-n>", "<cmd>lua _G.toggle_ollama()<CR>", opts)
     vim.keymap.set("t", "<C-n>", "<C-\\%><C-n><cmd>lua _G.toggle_ollama()<CR>", opts)
-
-    vim.keymap.set("n", "<leader>l", "<cmd>lua _G.toggle_lumen()<CR>", { noremap = true, silent = true, desc = "Toggle Lumen Diff" })
-    vim.keymap.set("t", "<leader>l", "<C-\\><C-n><cmd>lua _G.toggle_lumen()<CR>", { noremap = true, silent = true, desc = "Toggle Lumen Diff" })
   end,
 }

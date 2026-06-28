@@ -49,17 +49,26 @@ vim.keymap.set("n", "<C-f>", function()
   local file = vim.fn.expand("%:p")
   local ext = vim.fn.expand("%:e")
 
+  local in_tauri_rs = file:match("/src%-tauri/")
+  local in_tauri_fe = file:match("/src/")
+
   local cmd = nil
 
-  if ext == "rs" then
+  if ext == "rs" and in_tauri_rs then
+    cmd = "cargo fmt --manifest-path " .. vim.fn.getcwd() .. "/src-tauri/Cargo.toml"
+  elseif (ext == "ts" or ext == "tsx") and in_tauri_fe then
+    cmd = "deno fmt " .. file
+  elseif ext == "rs" then
     cmd = "cargo fmt"
+  elseif ext == "astro" then
+    cmd = "npm run astro format"
   elseif ext == "py" then
     cmd = "ruff format " .. file
   elseif ext == "gleam" then
     cmd = "gleam format"
   elseif ext == "zig" then
     cmd = "zig fmt ."
-  elseif ext == "js" or ext == "ts" or ext == "jsx" or ext == "tsx" or ext == "css" or ext == "html" then
+  elseif ext == "js" or ext == "md" or ext == "ts" or ext == "jsx" or ext == "tsx" or ext == "css" or ext == "html" then
     cmd = "deno fmt"
   else
     print("No formatter configured for this filetype.")
@@ -72,7 +81,7 @@ vim.keymap.set("n", "<C-f>", function()
       if data and data[1] ~= "" then
         print(table.concat(data, "\n"))
       else
-        print(cmd .. " completed")
+        print("format completed")
       end
       vim.cmd("checktime")  -- reload all changed buffers
     end,
@@ -84,4 +93,4 @@ vim.keymap.set("n", "<C-f>", function()
       vim.cmd("checktime")  -- also reload if it errored but still wrote to file
     end,
   })
-end, { desc = "Format current file", noremap = true, silent = true })
+end, { desc = "Format current file", noremap = true, silent = false })
