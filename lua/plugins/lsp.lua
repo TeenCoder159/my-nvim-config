@@ -23,6 +23,7 @@ return {
         "typescript",
         "tsx",
         "jsx",
+	"astro",
       },
       highlight = { enable = true },
     })
@@ -42,6 +43,7 @@ return {
             "gopls",
             "zls",
             "ts_ls",
+	    "astro",
           },
          automatic_installation = true,
        })
@@ -184,6 +186,13 @@ return {
         on_attach = on_attach,
       })
 
+	vim.lsp.config("astro", {
+	  capabilities = capabilities,
+	  on_attach = on_attach,
+	  filetypes = { "astro" },
+	  root_markers = { "astro.config.mjs", "astro.config.ts", "package.json", ".git" },
+})
+
       ----------------------------------------------------------------------
       -- TypeScript / JavaScript
       ----------------------------------------------------------------------
@@ -216,6 +225,7 @@ vim.lsp.config("tailwindcss", {
     "javascriptreact",
     "typescript",
     "typescriptreact",
+    "astro",
   },
 })
 
